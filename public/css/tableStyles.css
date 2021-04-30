@@ -1,0 +1,74 @@
+
+.display-table {
+    width: 80%;
+    margin: auto;
+    display: block;
+}
+
+.table-head{
+    text-align: center;
+}
+.table-text{
+    font-weight: normal;
+}
+.btn{
+    width: 48%;
+}
+#btnOpenModalNew{
+    margin: auto;
+    display: block;
+}
+/* Search Bar */
+.searchBar {
+    margin: auto;
+    display: block;
+    width: 80%;
+}
+.buttonSearch {
+    width: 100%;
+}
+
+/* MODAL */
+.modal.principal{
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 4; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+}
+.modal-body{
+    overflow: auto;
+    height: 300px;
+}
+.overflowing-content{
+    height: 100%;
+    width: 100%;
+}
+.modal-header > button{
+    border: none;
+    background-color: #202020;
+}
+.modal-header > button > span{
+    color: #fff;
+}
+
+h6.numTarea{
+    color: #fff;
+}
+
+hr{
+    color: black;
+}
+.color-body{
+    background-color: #202020;
+    border-color: #373b3e;
+}
+h5.modal-title{
+    color: #fff;
+    font-weight: bold;
+}
+label{
+    color: #fff;
+}

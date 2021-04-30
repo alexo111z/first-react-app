@@ -1,0 +1,72 @@
+/*
+.sidenav>.fa-times {
+    display: none;
+}*/
+
+a>i {
+    padding-left:   1em;
+    padding-top:    1em;
+    padding-bottom: 1em;
+    color: #818181;
+}
+.sidenav>a>i {
+    padding-left:   1em;
+    padding-top:    0.1em;
+    padding-bottom: 1em;
+    color: #818181;
+}
+
+/* The sidebar menu */
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 0; /* Set the width of the sidebar 0 , 160*/
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 100; /* Stay on top */
+    top: 0; /* Stay at the top (margen) */
+    left: 0; /* Stay at the left (margen) */
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+    transition: 0.7s;
+  }
+
+.sidenav ul {
+    padding: 0;
+
+}
+.sidenav li:hover {
+    border-left: 9px solid #3e84c1;
+    background-color: #34383d;
+}
+.sidenav a {
+    display: block;
+    padding: 10px 20px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 25;
+}
+.sidenav a:hover {
+    color: #fff; /*  #f1f1f1; */
+}
+
+#content {
+    padding: 10px;
+    transition: 0.7s;
+}
+
+  /*
+  The navigation menu links
+  .sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+  }*/
+
+  /*
+  On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size)
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }  */

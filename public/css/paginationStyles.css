@@ -1,0 +1,11 @@
+a.page-link{
+    background-color: #212529 !important;
+    border-color: #373b3e !important;
+    color: white;
+    font-size: 15px;
+}
+.page-item.active .page-link{
+    /* z-index: 3; */
+    color: #fff;
+    background-color: #0d6efd !important;
+}
