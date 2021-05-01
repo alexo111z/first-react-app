@@ -1,29 +1,31 @@
-function CreateTable({tableRows, showModal}) {
+function CreateTable({tableRows, showModal, onDelete}) {
     return(
     <div className="display-table">
-    <table className="table table-dark">
-        <thead>
-            <tr>
-                <th className="table-head">Tarea</th>
-                <th className="table-head">Descripción</th>
-                <th className="table-head">Estado</th>
-                <th className="table-head"></th>
-            </tr>
-        </thead>
-        <tbody>
+    <form method="POST" onSubmit={onDelete}>
+        <table className="table table-dark">
+            <thead>
+                <tr>
+                    <th className="table-head">Tarea</th>
+                    <th className="table-head">Descripción</th>
+                    <th className="table-head">Estado</th>
+                    <th className="table-head"></th>
+                </tr>
+            </thead>
+            <tbody>
 
-        {tableRows}
+            {tableRows}
 
-            <tr>
-                <th colSpan="2"></th>
-                <th colSpan="2">
-                    <button type="button" className="btn btn-primary" id="btnModalEditor" onClick={showModal}
-                        data-toggle="modal" data-target="#editarTareas">Editar</button>
-                    <button type="button" className="btn btn-danger" id="btnDeleteTarea">Eliminar</button>
-                </th>
-            </tr>
-        </tbody>
-    </table>
+                <tr>
+                    <th colSpan="2"></th>
+                    <th colSpan="2">
+                        <button type="button" className="btn btn-primary" id="btnModalEditor" onClick={showModal}
+                            data-toggle="modal" data-target="#editarTareas">Editar</button>
+                        <button type="submit" className="btn btn-danger" id="btnDeleteTarea">Eliminar</button>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </form>
     </div>)
 }
 
@@ -40,7 +42,7 @@ function ListaTareas(prop) {
                     </th>
                     <th>
                         <div className="form-check">
-                            <input type="checkbox" onClick={getCheckedRow} className="form-check-input" id={tarea.id} />
+                            <input type="checkbox" onClick={getCheckedRow} name="checkBox" className="form-check-input" id={tarea.id} />
                         </div>
                     </th>
                 </tr>
@@ -49,11 +51,22 @@ function ListaTareas(prop) {
     function getCheckedRow(e){
         prop.parentIsCheck(e.target)
     }
+    function getDeleteData(event){
+        const elements = event.target.elements.checkBox;
+        const eliminate = [];
+        for (let i = 0; i < elements.length; i++) {
+            if (elements[i].checked === true) {
+                eliminate.push( parseInt(elements[i].id) )
+            }            
+        }
+        event.preventDefault()
+        prop.onDelete(eliminate)
+    }
         
     return(
         <div className="listContainer">
             {
-                tareas.length !== 0 ? <CreateTable tableRows={tableRows} showModal={prop.showModal} /> : <p>No hay datos XD</p>            
+                tareas.length !== 0 ? <CreateTable tableRows={tableRows} showModal={prop.showModal} onDelete={getDeleteData} /> : <p>No hay datos XD</p>            
             }
         </div>
     );
