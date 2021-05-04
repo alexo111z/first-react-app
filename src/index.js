@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import App from './App';
 import Tareas from './containers/Tareas'
+import SideBar from './components/SideBar'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
+    <SideBar />
     <Tareas />
     {/* <App /> */}
   </React.StrictMode>,

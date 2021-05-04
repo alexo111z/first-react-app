@@ -35,17 +35,17 @@ function ListaTareas(prop) {
     let tableRows = []
     tableRows = tareas.map((tarea) => 
             <tr className="rowData" key={tarea.id}>
-                    <th className="table-text">{tarea.title}</th>
-                    <th className="table-text">{tarea.description}</th>
-                    <th className="table-text" value={tarea.state} >
-                        {parseInt(tarea.state) === 1 ? 'Completada' : 'Pendiente'}
-                    </th>
-                    <th>
-                        <div className="form-check">
-                            <input type="checkbox" onClick={getCheckedRow} name="checkBox" className="form-check-input" id={tarea.id} />
-                        </div>
-                    </th>
-                </tr>
+                <th className="table-text">{tarea.title}</th>
+                <th className="table-text">{tarea.description}</th>
+                <th className="table-text" value={tarea.state} >
+                    {parseInt(tarea.state) === 1 ? 'Completada' : 'Pendiente'}
+                </th>
+                <th>
+                    <div className="form-check">
+                        <input type="checkbox" onClick={getCheckedRow} name="checkBox" className="form-check-input" id={tarea.id} />
+                    </div>
+                </th>
+            </tr>
         );
 
     function getCheckedRow(e){

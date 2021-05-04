@@ -17,15 +17,15 @@ function ModalEditTarea(prop) {
                         <hr/>
                         <div className="md-form">
                             <label htmlFor={'inputForm'+inx}>Tarea</label>
-                            <input type="text" id={'inputForm'+inx} className="form-control" defaultValue={item.title}/>
+                            <input type="text" id={'inputForm'+inx} name="title" className="form-control" defaultValue={item.title}/>
                         </div>
                         <div className="md-form">
                             <label htmlFor={'areaForm'+inx}>Descripción</label>
-                            <textarea id={'areaForm'+inx} className="md-textarea form-control" rows="3" defaultValue={item.description}></textarea>
+                            <textarea id={'areaForm'+inx} name="description" className="md-textarea form-control" rows="3" defaultValue={item.description}></textarea>
                         </div>
                         <div>
                             <label htmlFor="optonForm">Estado: </label>
-                            <select className="custom-select custom-select-sm" defaultValue={item.state}>
+                            <select name="state" className="custom-select custom-select-sm" defaultValue={item.state}>
                                 <option value="0">Pendiente</option>
                                 <option value="1">Completado</option>
                             </select>
@@ -47,21 +47,23 @@ function ModalEditTarea(prop) {
         <div className="modal principal" tabIndex="-1" role="dialog" id="editarTareas" aria-labelledby="Editar" aria-hidden="true">
             <div className="modal-dialog" role="document">
                 <div className="modal-content color-body">
-                    <div className="modal-header">
-                        <h5 className="modal-title">Editar tareas</h5>
-                    </div>
-                    <div className="modal-body">
-
-                        <ModalContent data={datos} />
-
-                    </div>
-                    <div className="modal-footer">
-                        <div>
-                            <button type="button" className="btn btn-primary" id="saveDataModal">Guardar</button>
-                            <button type="button" className="btn btn-secondary" onClick={prop.closeModal}
-                                id="closeModal" data-dismiss="modal">Cerrar</button>
+                    <form method="POST" onSubmit={prop.onEdit} >
+                        <div className="modal-header">
+                            <h5 className="modal-title">Editar tareas</h5>
                         </div>
-                    </div>
+                        <div className="modal-body">
+
+                            <ModalContent data={datos} />
+
+                        </div>
+                        <div className="modal-footer">
+                            <div>
+                                <button type="submit" className="btn btn-primary" id="saveDataModal">Guardar</button>
+                                <button type="button" className="btn btn-secondary" onClick={prop.closeModal}
+                                    id="closeModal" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

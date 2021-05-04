@@ -128,6 +128,64 @@ function Tareas() {
         }, networkError => console.log(networkError.message+' - networkError'))
         .catch((error) => console.log(error+' - catch'));
     }
+    function editTareas(event){
+        let array = [];
+        let data = event.target.elements
+        event.preventDefault()
+        if (!data.id){
+            return alert('No seleccionaste datos para editar!!');
+        }
+        if (!data.id.length){
+            array.push({
+                id: parseInt(data.id.value),
+                title: data.title.value,
+                description: data.description.value,
+                state: data.state.value
+            })
+        }else {
+            for (let i = 0; i < data.id.length; i++) {
+                array.push({
+                    id: parseInt(data.id[i].value),
+                    title: data.title[i].value,
+                    description: data.description[i].value,
+                    state: data.state[i].value
+                })
+            }
+        }
+        const newArray = showTareas.map((elem) => {
+            for (let i = 0; i < array.length; i++) {
+                if(array[i].id === elem.id){
+                    elem = { ...elem,
+                        // id: elem.id,
+                        title:  array[i].title,
+                        description: array[i].description,
+                        state: array[i].state
+                    }
+                }
+            }
+            return elem;
+        })
+        setTareas(newArray)
+        editModalStatus()
+
+        const host = 'localhost:8000'
+        const get = '/api/edit'
+        const postUrl = 'http://'+host+get;
+
+        var csrf_token = '<?php echo csrf_token(); ?>';
+        fetch(postUrl, {
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json, text-plain, */*",
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-TOKEN": csrf_token
+            },
+            method: 'POST',
+            credentials: "same-origin",
+            body: JSON.stringify(array)
+        }).then(resp => console.log( resp )).catch((error) => console.log(error+' - catch'));
+
+    }
 
     function editModalStatus() {
         setShowEditModal(!showEditModal)
@@ -156,7 +214,7 @@ function Tareas() {
             <button type="button" className="btn btn-primary" onClick={newModalStatus} 
                 id="btnOpenModalNew" data-toggle="modal" data-target="#newTarea">Crear Tarea</button>
 
-            <ModalEditTarea editInfo={showTareas} showModal={showEditModal} closeModal={editModalStatus} />
+            <ModalEditTarea editInfo={showTareas} showModal={showEditModal} closeModal={editModalStatus} onEdit={editTareas} />
             <ModalNewTarea showModal={showNewModal} closeModal={newModalStatus} createNew={createTarea} />
         </div>
     )
