@@ -1,8 +1,6 @@
 
 function SideBar() {
 
-    
-
     function openSideNav() {
         document.getElementById('menuBar').style.width = '160px';
         document.getElementById('root').style.marginLeft = '160px';
@@ -16,16 +14,16 @@ function SideBar() {
     }
 
     return(
-        <div class="sideBar">
+        <div className="sideBar">
             <a onClick={openSideNav}>
-                <i class="fa fa-bars fa-lg" aria-hidden="true" id="iconOpenNav"></i>
+                <i className="fa fa-bars fa-lg" aria-hidden="true" id="iconOpenNav"></i>
             </a>
 
-            <div class="sidenav" id="menuBar">
+            <div className="sidenav" id="menuBar">
                 <a onClick={closeSideNav}>
-                    <i class="fa fa-bars fa-lg" aria-hidden="true" id="iconCloseNav"></i>
+                    <i className="fa fa-bars fa-lg" aria-hidden="true" id="iconCloseNav"></i>
                 </a>
-                <div class="navList">
+                <div className="navList">
                     <ul>
                         <li><a href="">Perfil</a></li>
                         <li><a href="">Inicio</a></li>

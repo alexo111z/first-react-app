@@ -58,33 +58,20 @@ function Tareas() {
         const description = data.description.value
         event.preventDefault()
 
-        const host = 'localhost:8000'
-        const get = '/api/create'
-        const postUrl = 'http://'+host+get;
-
         if (!title.length > 0 || !description.length > 0) {
             return alert('Rellena los campos por favor')
         }
-        var csrf_token = '<?php echo csrf_token(); ?>';
+        
         const toInsert = {
             id: tareas[tareas.length-1].id+1,
             title,
             description,
-            state: "0"}
+            state: "0"
+        }
+        
+        const dir = '/api/create'
+        apiRequest(toInsert, dir, 'POST')
 
-        fetch(postUrl, {
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json, text-plain, */*",
-                "X-Requested-With": "XMLHttpRequest",
-                "X-CSRF-TOKEN": csrf_token
-            },
-            method: 'POST',
-            credentials: "same-origin",
-            body: JSON.stringify(toInsert)
-        }).then(resp => console.log( resp )).catch((error) => console.log(error+' - catch'));
-
-        // {id: int, title: string, description: string, state: string[0,1]}
         let newObject = Object.assign([], showTareas);
         newObject.push(toInsert)
         setTareas(newObject);
@@ -107,27 +94,10 @@ function Tareas() {
         })
         setShowTareas(o);
 
-        const host = 'localhost:8000'
-        const get = '/api/delete'
-        const postUrl = 'http://'+host+get;
-        var csrf_token = '<?php echo csrf_token(); ?>';
-        
-        fetch(postUrl, {
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json, text-plain, */*",
-                "X-Requested-With": "XMLHttpRequest",
-                "X-CSRF-TOKEN": csrf_token
-                },
-            method: 'DELETE',
-            credentials: "same-origin",
-            body: JSON.stringify(data)
-        })
-        .then((resp) => {
-           console.log(resp);
-        }, networkError => console.log(networkError.message+' - networkError'))
-        .catch((error) => console.log(error+' - catch'));
+        const dir = '/api/delete'
+        apiRequest(data, dir, 'DELETE')
     }
+
     function editTareas(event){
         let array = [];
         let data = event.target.elements
@@ -167,10 +137,15 @@ function Tareas() {
         })
         setTareas(newArray)
         editModalStatus()
+        
+        const dir = '/api/edit'
+        apiRequest(array, dir, 'POST')
 
+    }
+
+    function apiRequest(data, url, type) {
         const host = 'localhost:8000'
-        const get = '/api/edit'
-        const postUrl = 'http://'+host+get;
+        const postUrl = 'http://'+host+url;
 
         var csrf_token = '<?php echo csrf_token(); ?>';
         fetch(postUrl, {
@@ -180,11 +155,10 @@ function Tareas() {
                 "X-Requested-With": "XMLHttpRequest",
                 "X-CSRF-TOKEN": csrf_token
             },
-            method: 'POST',
+            method: type,
             credentials: "same-origin",
-            body: JSON.stringify(array)
+            body: JSON.stringify(data)
         }).then(resp => console.log( resp )).catch((error) => console.log(error+' - catch'));
-
     }
 
     function editModalStatus() {
